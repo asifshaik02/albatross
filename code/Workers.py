@@ -3,11 +3,11 @@
 
 from Employee import Employee
 
-class Workers(Employee):
+class Workers(WorkHrs,JobAssigned,Skills):
     def __init__(self):
-        self.WorkHrs = None
-        self.JobAssigned = None
-        self.Skills = None
+        self.WorkHrs = WorkHrs
+        self.JobAssigned = JobAssigned
+        self.Skills = Skills
 
     def getTotalWorkHrs(self, ):
         pass
