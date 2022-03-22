@@ -9,6 +9,7 @@ class Billing:
         self.quantity = quantity
         self.medicineName = m_name
 
-    def getBillTransactions(self, ):
+    def getBillTransactions(self,bid ):
+        self.b_id=bid
         pass
 
