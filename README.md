@@ -18,6 +18,6 @@ A desktop application connecting medical shop owners to maintain their medicines
 
 
 ** Python <br />
-**GUI:** Tkinter
-**DBMS:** Postgresql
+**GUI:** Tkinter<br />
+**DBMS:** Postgresql<br />
 **IDE:** Visual code
