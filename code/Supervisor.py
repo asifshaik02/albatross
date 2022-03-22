@@ -5,14 +5,13 @@ from Employee import Employee
 
 class Supervisor(Employee):
     def __init__(self):
-        self.Attribute1 = None
-
-    def requestMedicines(self, ):
+        pass
+    def requestMedicines(self,mid ):
         pass
 
-    def assignwork(self, ):
+    def assignwork(self,eid ):
         pass
 
-    def assignWorkHrs(self, e_id; String):
+    def assignWorkHrs(self, e_id,no_of_hrs):
         pass
 
