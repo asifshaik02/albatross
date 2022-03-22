@@ -13,7 +13,8 @@
 A desktop application connecting medical shop owners to maintain their medicines data and provide functionalities like billing.
 
 ## Tools
-**Programming Lnaguage:** Python
-**GUI:** Tkinter
-**DBMS:** Postgresql
+
+**Programming Language: **Python <br />
+**GUI:** Tkinter<br />
+**DBMS:** Postgresql<br />
 **IDE:** Visual code
