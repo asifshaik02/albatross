@@ -10,6 +10,5 @@ class Billing:
         self.medicineName = m_name
 
     def getBillTransactions(self,bid ):
-        self.b_id=bid
         pass
 
