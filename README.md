@@ -14,10 +14,7 @@ A desktop application connecting medical shop owners to maintain their medicines
 
 ## Tools
 
-**Programming Language:
-
-
-** Python <br />
+**Programming Language: **Python <br />
 **GUI:** Tkinter<br />
 **DBMS:** Postgresql<br />
 **IDE:** Visual code
