@@ -10,5 +10,5 @@ class Workers(Employee):
         self.Skills = Skills
 
     def getTotalWorkHrs(self, e_id):
-        print("Hello")
+        print("Hell")
 
