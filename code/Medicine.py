@@ -4,6 +4,7 @@
 from cgitb import text
 from functools import partial
 from tkinter import *
+from Database import Database
 
 class Medicine:
     def __init__(self,m_name=None,m_id=None,mfg=None,t=None,rack_no=None,cost=None,exp_date=None,reorder_lvl=None):
@@ -15,27 +16,28 @@ class Medicine:
         self.cost = cost
         self.exp_date = exp_date
         self.reorder_lvl = reorder_lvl
+        self.sq = Database()
         self.gui()
 
     def getRackNo(self, m_id):
-        # implemented later using database
-        return "10"
+        q = f"select rack_no from medicine where m_id='{m_id}';"
+        return self.sq.execute(q)
 
     def getType(self, m_id):
-        # implemented later using database
-        return "Tablets"
+        q = f"select m_type from medicine where m_id='{m_id}';"
+        return self.sq.execute(q)
 
     def expiryStatus(self, m_id):
-        # implemented later using database
-        return "10/12/2022"
+        q = f"select expiry from medicine where m_id='{m_id}';"
+        return self.sq.execute(q)
 
     def getCost(self, m_id):
-        # implemented later using database
-        return "1000/-"
+        q = f"select m_cost from medicine where m_id='{m_id}';"
+        return self.sq.execute(q)
 
     def getReorderLevel(self, m_id):
-        # implemented later using database
-        return "200"
+        q = f"select reorder_lvl from medicine where m_id='{m_id}';"
+        return self.sq.execute(q)
 
     def getDetails(self,m_id):
         self.m_id = m_id.get()
