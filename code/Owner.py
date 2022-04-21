@@ -172,6 +172,7 @@ labele_roleq=Label(childframe2)
 labelo_id=Label(childframe2,text="Owner ID of the employee is        : ")
 labelo_idq=Label(childframe2)
 
+<<<<<<< HEAD
 labele_name.grid(row=1,column=0)
 labele_nameq.grid(row=1,column=1)
 labele_phone.grid(row=2,column=0)
@@ -184,3 +185,7 @@ labelo_idq.grid(row=4,column=1)
 root.mainloop()
 curr.close()
 conn.close()
+=======
+        root.mainloop()
+# obj = Owner()
+>>>>>>> b7b2b9e1ca58c3505fab41d9d8a1c8000e19ec3f

@@ -53,44 +53,51 @@ class Medicine:
         root = Tk()
         root.geometry('600x450')  
         root.title('Medicine')
+        title=Label(root,text='Medicines Details',bg='#2D9290',fg='White',font=('times new romman',30,'bold','italic'),relief=GROOVE,bd=5)
+        title.pack(fill=X)
 
-        topFrame = Frame(root)
-        topFrame.pack()
+        topFrame = LabelFrame(root,text="Medicine Details",font=('times new romman',10,'bold','italic'),fg='gold',padx=10)
+        topFrame.pack(fill=X)
 
-        medIdLabel = Label(topFrame,text="Medicine Id:",pady=40)
+        medIdLabel = Label(topFrame,text="Medicine Id:",pady=40,padx=40)
         medIdLabel.grid(row=0,column=0)
 
         med_id = StringVar()
         medIdEntry = Entry(topFrame, textvariable=med_id)
         medIdEntry.grid(row=0, column=1)
 
-        emptyLabel = Label(topFrame,text="")
-        emptyLabel.grid(row=0,column=2)
-
         bottomFrame = Frame(root,pady=20)
         bottomFrame.pack()
 
         def show(id):
+            for widgets in bottomFrame.winfo_children():
+                widgets.destroy()
             self.getDetails(id)
-            Label(bottomFrame,text="Id:").grid(row=0,column=0)
-            Label(bottomFrame,text=self.m_id).grid(row=0,column=1)
-            Label(bottomFrame,text="Rack:").grid(row=1,column=0)
-            Label(bottomFrame,text=self.rack_no).grid(row=1,column=1)
-            Label(bottomFrame,text="Type:").grid(row=2,column=0)
-            Label(bottomFrame,text=self.type).grid(row=2,column=1)
-            Label(bottomFrame,text="Expiry:").grid(row=3,column=0)
-            Label(bottomFrame,text=self.exp_date).grid(row=3,column=1)
-            Label(bottomFrame,text="Cost:").grid(row=4,column=0)
-            Label(bottomFrame,text=self.cost).grid(row=4,column=1)
-            Label(bottomFrame,text="Reorder level:").grid(row=5,column=0)
-            Label(bottomFrame,text=self.reorder_lvl).grid(row=5,column=1)
+            Label(bottomFrame,text="Id:").grid(row=0,column=0,sticky=W,pady=2)
+            Label(bottomFrame,text=self.m_id).grid(row=0,column=1,sticky=W)
+            Label(bottomFrame,text="Rack:").grid(row=1,column=0,sticky=W,pady=2)
+            Label(bottomFrame,text=self.rack_no).grid(row=1,column=1,sticky=W)
+            Label(bottomFrame,text="Type:").grid(row=2,column=0,sticky=W,pady=2)
+            Label(bottomFrame,text=self.type).grid(row=2,column=1,sticky=W)
+            Label(bottomFrame,text="Expiry:").grid(row=3,column=0,sticky=W,pady=2)
+            Label(bottomFrame,text=self.exp_date).grid(row=3,column=1,sticky=W)
+            Label(bottomFrame,text="Cost:").grid(row=4,column=0,sticky=W,pady=2)
+            Label(bottomFrame,text=self.cost).grid(row=4,column=1,sticky=W)
+            Label(bottomFrame,text="Reorder level:").grid(row=5,column=0,sticky=W,pady=2)
+            Label(bottomFrame,text=self.reorder_lvl).grid(row=5,column=1,sticky=W)
 
         getDetails = partial(show, med_id)
-        getRackButton = Button(topFrame,text="Medicine Details", command=getDetails)
-        getRackButton.grid(row=1,column=1)
+        getRackButton = Button(topFrame,text="Get Details", command=getDetails)
+        getRackButton.grid(row=0,column=2,padx=20)
         
 
+<<<<<<< HEAD
         return root
+=======
+        root.mainloop()
+        # return root
+
+>>>>>>> b7b2b9e1ca58c3505fab41d9d8a1c8000e19ec3f
 
 def forOwner():
     return obj.gui()
