@@ -17,7 +17,7 @@ class Medicine:
         self.exp_date = exp_date
         self.reorder_lvl = reorder_lvl
         self.sq = Database()
-        # self.gui()
+        self.gui()
 
     def getRackNo(self, m_id):
         q = f"select rack_no from medicine where m_id='{m_id}';"
@@ -91,8 +91,8 @@ class Medicine:
         getRackButton.grid(row=0,column=2,padx=20)
         
 
-        # root.mainloop()
-        return root
+        root.mainloop()
+        # return root
 
 
-# obj = Medicine()
+obj = Medicine()

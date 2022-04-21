@@ -4,8 +4,9 @@
 from Employee import Employee
 
 class Supervisor(Employee):
-    def __init__(self):
-        pass
+    def __init__(self,*args):
+        super().__init__(*args)
+        print(self.e_name)
     def requestMedicines(self,mid ):
         pass
 

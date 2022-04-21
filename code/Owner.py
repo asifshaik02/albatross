@@ -64,4 +64,4 @@ class Owner:
         
 
         root.mainloop()
-obj = Owner()
+# obj = Owner()
