@@ -44,11 +44,7 @@ except Exception as error:
 
 
 
-root=Tk()
-date=dt.datetime.now()
-format_date=f"{date:%a, %b %d %Y}"
-root.title("Owner --- "+format_date)
-root.geometry("900x650")
+
 
 
 
@@ -82,7 +78,11 @@ class Owner:
     def getBillTransactions(self, biil_id):
         pass
     def gui(self):
-
+        root=Tk()
+        date=dt.datetime.now()
+        format_date=f"{date:%a, %b %d %Y}"
+        root.title("Owner --- "+format_date)
+        root.geometry("900x650")
         # cur=Owner()
 
         my_notebook = ttk.Notebook(root)
