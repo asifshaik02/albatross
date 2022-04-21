@@ -176,10 +176,11 @@ class Owner:
         labele_roleq.grid(row=3,column=1)
         labelo_id.grid(row=4,column=0)
         labelo_idq.grid(row=4,column=1)
+        root.mainloop()
 #
 # obj=Owner()
 # obj.gui()
-root.mainloop()
+
 curr.close()
 conn.close()
 # =======
