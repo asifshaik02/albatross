@@ -10,7 +10,7 @@ from tkinter.messagebox import showinfo
 #from click import command
 
 hostname='localhost'
-database='firstdatabase'
+database='postgres'
 username='postgres'
 pwd='pgadmin'
 port_id=5432
@@ -21,7 +21,7 @@ try:
             host=hostname,
             dbname=database,
             user=username,
-            password=pwd,
+            password='1234',
             port=port_id)
     
     curr=conn.cursor()

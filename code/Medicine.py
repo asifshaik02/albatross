@@ -1,5 +1,5 @@
-#!/usr/bin/python
-#-*- coding: utf-8 -*-
+# !/usr/bin/python
+# -*- coding: utf-8 -*-
 
 from cgitb import text
 from functools import partial
@@ -17,7 +17,7 @@ class Medicine:
         self.exp_date = exp_date
         self.reorder_lvl = reorder_lvl
         self.sq = Database()
-        self.gui()
+        # self.gui()
 
     def getRackNo(self, m_id):
         q = f"select rack_no from medicine where m_id='{m_id}';"
@@ -90,7 +90,10 @@ class Medicine:
         getRackButton.grid(row=1,column=1)
         
 
-        root.mainloop()
+        return root
 
-
+def forOwner():
+    return obj.gui()
+    
+    
 obj = Medicine()
