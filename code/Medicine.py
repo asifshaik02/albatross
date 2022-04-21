@@ -91,16 +91,12 @@ class Medicine:
         getRackButton.grid(row=0,column=2,padx=20)
         
 
-<<<<<<< HEAD
-        return root
-=======
         root.mainloop()
         # return root
 
->>>>>>> b7b2b9e1ca58c3505fab41d9d8a1c8000e19ec3f
 
 def forOwner():
     return obj.gui()
     
     
-obj = Medicine()
+# obj = Medicine()

@@ -1,5 +1,6 @@
 from tkinter import *
 from functools import partial
+from tkinter import messagebox
 from PIL import ImageTk,Image
 from Database import Database
 from Supervisor import Supervisor
@@ -27,8 +28,10 @@ def validateLogin(username, password):
         elif role == "worker":
             res = sq.execute(f"select e_name,e_id,e_password,e_phone,e_role from employee where e_id='{usr}'")
             Workers("","","",res[0][0],res[0][1],res[0][2],res[0][3],res[0][4])
+        root.destroy()
     else:
         print("No")
+        messagebox.showerror("Error","Wrong credntials")
 
     return
 
