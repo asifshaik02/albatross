@@ -85,10 +85,11 @@ class Billing:
         res = sq.execute(f"select m_cost from medicine where m_name='{n}'")
         
         self.sum += res[0][0] * c
-        print(self.sum)
 
         res=Label(f3,text=self.sum,font=('times new romman',15,'bold','italic'))
-        res.place(x=300,y=120,sticky='s')
+        res.grid(row=1,column=0,sticky=SE,pady=18)
+        tcost=Label(f3,text="Total Cost:",font=('times new romman',20,'bold','italic'),fg='black')
+        tcost.grid(row=1,column=0,sticky=S,pady=20)
     
     def gui(self):
         root=Tk()
@@ -103,7 +104,7 @@ class Billing:
         med=Label(f1,text="Medicine Name",font=('times new romman',15,'bold','italic','underline'),fg='black')
         med.grid(row=0,column=0,padx=20,pady=15)
 
-        quan=Label(f1,text="Medicine Quantity",font=('times new romman',15,'bold','italic'),fg='black')
+        quan=Label(f1,text="Medicine Quantity",font=('times new romman',15,'bold','italic','underline'),fg='black')
         quan.grid(row=4,column=0,padx=20,pady=15)
         
         m_name = StringVar()
