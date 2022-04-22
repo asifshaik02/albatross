@@ -19,16 +19,16 @@ def validateLogin(username, password):
     # print(passw)
     if pwd == passw:
         # print(role)
+        root.destroy()
         if role == "owner":
             res = sq.execute(f"select o_name,o_id,o_phone,o_pass from owners where o_id='{usr}'")
-            Owner(res[0][0],res[0][1],res[0][2],res[0][3])
+            Owner(res[0][0],res[0][1],res[0][2],res[0][3]).gui()
         elif role == "supervisor":
             res = sq.execute(f"select e_name,e_id,e_password,e_phone,e_role from employee where e_id='{usr}'")
             Supervisor(res[0][0],res[0][1],res[0][2],res[0][3],res[0][4])
         elif role == "worker":
             res = sq.execute(f"select e_name,e_id,e_password,e_phone,e_role from employee where e_id='{usr}'")
             Workers("","","",res[0][0],res[0][1],res[0][2],res[0][3],res[0][4])
-        root.destroy()
     else:
         print("No")
         messagebox.showerror("Error","Wrong credntials")
