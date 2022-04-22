@@ -16,3 +16,7 @@ class Database:
     def execute(self,command):
         self.cur.execute(command)
         return self.cur.fetchall()
+    
+    def insert(self,command):
+        self.cur.execute(command)
+        self.conn.commit()

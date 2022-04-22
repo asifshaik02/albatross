@@ -1,28 +1,15 @@
 from datetime import date as dt
-from distutils.command.config import config
 from tkinter import *
-from tkinter import messagebox
 from functools import partial
-from tkinter.font import BOLD
-import psycopg2
 from tkinter import ttk
 import tkinter as tk
-from tkinter.messagebox import showinfo
 from Database import Database
-#from click import command
+
 class Billing:
     def __init__(self):
         self.sum=0
         self.res=[]
         self.ans=0
-    
-    
-    
-
-
-
-#-------Buttons----#
-    
 
     def getBillTransactions(self,m_name,quantity,f2):
         
@@ -41,11 +28,9 @@ class Billing:
         viewtree.column('c',width=180,anchor=CENTER)
 
         r=sq.execute(f"select m_cost,m_name from medicine where m_name='{n}'")
-        # r=sq.fetchall()
 
         for i in r:
             self.res.append([i[1],i[0],c])
-        print(self.res)
     
         style=ttk.Style()
         style.theme_use("default")
@@ -56,19 +41,13 @@ class Billing:
         viewtree.configure(yscroll=scrollbar.set)
         scrollbar.grid(row=0,column=1,sticky='ns')
     
-        
-        
-        
-        
     def totalcost(self,m_name,quantity,f3):
         sq=Database()
         n = m_name.get()
         c = int(quantity.get())
         res = sq.execute(f"select m_cost from medicine where m_name='{n}'")
-        # for i in curr:
-        #     print(i)
-        self.sum+=res[0][0] * c
-        print(self.sum)
+
+        self.sum += res[0][0] * c
 
         columns=('m_name','m_cost','c')
         viewtree=ttk.Treeview(f3,columns=columns,show='headings')
@@ -79,7 +58,7 @@ class Billing:
         viewtree.column('m_cost',width=200,anchor=CENTER)
         viewtree.column('c',width=180,anchor=CENTER)
         viewtree.grid(row=0,column=0,sticky='nsew')
-        print(self.res)
+
         for i in self.res:
             viewtree.insert('','end',values=i)
         scrollbar=ttk.Scrollbar(f3,orient=tk.VERTICAL,command=viewtree.yview)
@@ -91,11 +70,9 @@ class Billing:
         self.ans=r[0][0]
         id=r[0][1]
         b = sq.execute("select b_id from billing")
-        print(b)
         if len(b) == 0:
             b = 0
         else:
-            # b = max(b,key=lambda x:x[0]) + 1
             b = b[-1][0] + 1
         a=sq.insert(f"insert into billing (b_id,b_date,quantity,m_name,m_cost,b_total,m_id) values ({b},'{str(dt.today())}',{c},'{n}',{self.ans},{self.sum},'{id}') ")
 
@@ -108,7 +85,7 @@ class Billing:
         res = sq.execute(f"select m_cost from medicine where m_name='{n}'")
         
         self.sum += res[0][0] * c
-        print(self.sum)
+
         res=Label(f3,text=self.sum,font=('times new romman',15,'bold','italic'))
         res.place(x=300,y=120)
     
@@ -130,8 +107,10 @@ class Billing:
         
         m_name = StringVar()
         m_quan=IntVar()
-        mnameEntry = Entry(f1, textvariable=m_name,relief=SUNKEN,bd=7).grid(row=0, column=3)
-        mquanEntry = Entry(f1, textvariable=m_quan,relief=SUNKEN,bd=7).grid(row=4, column=3)
+        mnameEntry = Entry(f1, textvariable=m_name,relief=SUNKEN,bd=7)
+        mnameEntry.grid(row=0, column=3)
+        mquanEntry = Entry(f1, textvariable=m_quan,relief=SUNKEN,bd=7)
+        mquanEntry.grid(row=4, column=3)
         f2=LabelFrame(root,text="Bill",font=('times new romman',20,'bold','italic'),fg='gold')
         f2.place(x=700,y=90,height=500,width=600)
 
@@ -139,9 +118,9 @@ class Billing:
         f3.place(x=5,y=590,width=600,height=120)
 
 
-        bill=partial(self.getBillTransactions,m_name,m_quan,f2)
-        cost=partial(self.totalcost,m_name,m_quan,f2)
-        win=partial(self.window,m_name,m_quan,f2)
+        bill=partial(self.getBillTransactions,mnameEntry,mquanEntry,f2)
+        cost=partial(self.totalcost,mnameEntry,mquanEntry,f2)
+        win=partial(self.window,mnameEntry,mquanEntry,f2)
         enter=Button(f1,text="Enter",command=bill,font=('times new romman',15,'bold'))
         enter.grid(row=8,column=3)
         button_2=Button(f3,text="Generate Bill",command=cost,font=('times new romman',15,'bold'),bg='gold')
