@@ -85,9 +85,10 @@ class Billing:
         res = sq.execute(f"select m_cost from medicine where m_name='{n}'")
         
         self.sum += res[0][0] * c
+        print(self.sum)
 
         res=Label(f3,text=self.sum,font=('times new romman',15,'bold','italic'))
-        res.place(x=300,y=120)
+        res.place(x=300,y=120,sticky='s')
     
     def gui(self):
         root=Tk()
@@ -129,6 +130,7 @@ class Billing:
         button_3.grid(row=0,column=20,padx=30,pady=10)
 
         root.mainloop()
+
 
         
         
