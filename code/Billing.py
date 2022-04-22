@@ -10,51 +10,19 @@ import tkinter as tk
 from tkinter.messagebox import showinfo
 from Database import Database
 #from click import command
-
-
-    
-
-
-
-
-
-
-
 class Billing:
     def __init__(self):
         self.sum=0
         self.res=[]
         self.ans=0
     
-    root=Tk()
-    root.title("Medical Store Billing")
-    root.geometry("600x480")
-
-    title=Label(root,text='Medicines Billing System',bg='#2D9290',fg='White',font=('times new romman',40,'bold','italic'),relief=GROOVE,bd=10)
-    title.pack(fill=X)
-    f1=LabelFrame(root,text="Medicine Details",font=('times new romman',20,'bold','italic'),fg='gold')
-    f1.place(x=5,y=90,height=500,width=600)
-
-    med=Label(f1,text="Medicine Name",font=('times new romman',15,'bold','italic','underline'),fg='black')
-    med.grid(row=0,column=0,padx=20,pady=15)
-
-    quan=Label(f1,text="Medicine Quantity",font=('times new romman',15,'bold','italic'),fg='black')
-    quan.grid(row=4,column=0,padx=20,pady=15)
     
-    m_name = StringVar()
-    m_quan=IntVar()
-    mnameEntry = Entry(f1, textvariable=m_name,relief=SUNKEN,bd=7).grid(row=0, column=3)
-    mquanEntry = Entry(f1, textvariable=m_quan,relief=SUNKEN,bd=7).grid(row=4, column=3)
-    f2=LabelFrame(root,text="Bill",font=('times new romman',20,'bold','italic'),fg='gold')
-    f2.place(x=700,y=90,height=500,width=600)
-
     
 
 
 
 #-------Buttons----#
-    f3=Frame(root,relief=GROOVE,bd=10,bg='white')
-    f3.place(x=5,y=590,width=600,height=120)
+    
 
     def getBillTransactions(self,m_name,quantity,f2):
         
@@ -73,7 +41,7 @@ class Billing:
         viewtree.column('c',width=180,anchor=CENTER)
 
         r=sq.execute(f"select m_cost,m_name from medicine where m_name='{n}'")
-        r=sq.fetchall()
+        # r=sq.fetchall()
 
         for i in r:
             self.res.append([i[1],i[0],c])
@@ -96,10 +64,10 @@ class Billing:
         sq=Database()
         n = m_name.get()
         c = int(quantity.get())
-        sq.execute(f"select m_cost from medicine where m_name='{n}'")
+        res = sq.execute(f"select m_cost from medicine where m_name='{n}'")
         # for i in curr:
         #     print(i)
-        self.sum+=(list(sq)[0][0])*c
+        self.sum+=res[0][0] * c
         print(self.sum)
 
         columns=('m_name','m_cost','c')
@@ -118,54 +86,79 @@ class Billing:
         viewtree.configure(yscroll=scrollbar.set)
         scrollbar.grid(row=0,column=1,sticky='ns')
 
-        sq.execute(f"select m_cost,m_id from medicine where m_name='{n}'")
-        r=sq.fetchall()
-        print(r[0][0])
-        print(r[0][1])
+        r = sq.execute(f"select m_cost,m_id from medicine where m_name='{n}'")
+
         self.ans=r[0][0]
         id=r[0][1]
-        print(self.ans)
-        print(id)
-        a=sq.execute(f"insert into billing (b_id,b_date,quantity,m_name,m_cost,b_total,m_id) values ({0},{str(dt.today())},{c},'n',{self.ans},{self.sum},'id') ") 
+        b = sq.execute("select b_id from billing")
+        print(b)
+        if len(b) == 0:
+            b = 0
+        else:
+            # b = max(b,key=lambda x:x[0]) + 1
+            b = b[-1][0] + 1
+        a=sq.insert(f"insert into billing (b_id,b_date,quantity,m_name,m_cost,b_total,m_id) values ({b},'{str(dt.today())}',{c},'{n}',{self.ans},{self.sum},'{id}') ")
+
             
 
     def window(self,m_name,quantity,f3):
         sq=Database()
         n = m_name.get()
         c = int(quantity.get())
-        sq.execute(f"select m_cost from medicine where m_name='{n}'")
+        res = sq.execute(f"select m_cost from medicine where m_name='{n}'")
         
-        self.sum+=(list(sq)[0][0])*c
+        self.sum += res[0][0] * c
         print(self.sum)
         res=Label(f3,text=self.sum,font=('times new romman',15,'bold','italic'))
         res.place(x=300,y=120)
+    
+    def gui(self):
+        root=Tk()
+        root.title("Medical Store Billing")
+        root.geometry("600x480")
 
-    bill=partial(getBillTransactions,m_name,m_quan,f2)
-    cost=partial(totalcost,m_name,m_quan,f2)
-    win=partial(window,m_name,m_quan,f2)
-    enter=Button(f1,text="Enter",command=bill,font=('times new romman',15,'bold'))
-    enter.grid(row=8,column=3)
-    button_2=Button(f3,text="Generate Bill",command=cost,font=('times new romman',15,'bold'),bg='gold')
-    button_2.grid(row=0,column=4)
-    button_3=Button(f3,text="Total Cost",command=win,font=('times new romman',15,'bold'),bg='gold')
-    button_3.grid(row=0,column=20,padx=30,pady=10)
+        title=Label(root,text='Medicines Billing System',bg='#2D9290',fg='White',font=('times new romman',40,'bold','italic'),relief=GROOVE,bd=10)
+        title.pack(fill=X)
+        f1=LabelFrame(root,text="Medicine Details",font=('times new romman',20,'bold','italic'),fg='gold')
+        f1.place(x=5,y=90,height=500,width=600)
 
-    root.mainloop()
+        med=Label(f1,text="Medicine Name",font=('times new romman',15,'bold','italic','underline'),fg='black')
+        med.grid(row=0,column=0,padx=20,pady=15)
+
+        quan=Label(f1,text="Medicine Quantity",font=('times new romman',15,'bold','italic'),fg='black')
+        quan.grid(row=4,column=0,padx=20,pady=15)
+        
+        m_name = StringVar()
+        m_quan=IntVar()
+        mnameEntry = Entry(f1, textvariable=m_name,relief=SUNKEN,bd=7).grid(row=0, column=3)
+        mquanEntry = Entry(f1, textvariable=m_quan,relief=SUNKEN,bd=7).grid(row=4, column=3)
+        f2=LabelFrame(root,text="Bill",font=('times new romman',20,'bold','italic'),fg='gold')
+        f2.place(x=700,y=90,height=500,width=600)
+
+        f3=Frame(root,relief=GROOVE,bd=10,bg='white')
+        f3.place(x=5,y=590,width=600,height=120)
+
+
+        bill=partial(self.getBillTransactions,m_name,m_quan,f2)
+        cost=partial(self.totalcost,m_name,m_quan,f2)
+        win=partial(self.window,m_name,m_quan,f2)
+        enter=Button(f1,text="Enter",command=bill,font=('times new romman',15,'bold'))
+        enter.grid(row=8,column=3)
+        button_2=Button(f3,text="Generate Bill",command=cost,font=('times new romman',15,'bold'),bg='gold')
+        button_2.grid(row=0,column=4)
+        button_3=Button(f3,text="Total Cost",command=win,font=('times new romman',15,'bold'),bg='gold')
+        button_3.grid(row=0,column=20,padx=30,pady=10)
+
+        root.mainloop()
 
 
      
-    
+obj = Billing()
+obj.gui()      
         
         
-        
 
         
-
-
-
-
-
-
 
 
 
