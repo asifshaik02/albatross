@@ -1,7 +1,7 @@
 #!/usr/bin/python
 #-*- coding: utf-8 -*-
 
-from tkinter import X, Button, Frame, Label, Tk
+from tkinter import CENTER, GROOVE, X, Button, Frame, Label, Tk
 from Billing import Billing
 
 
@@ -18,7 +18,7 @@ class Employee:
         pass
 
     def billgeneration(self):
-        obj = Billing()
+        obj = Billing().gui()
 
     def gui(self):
         root = Tk()
@@ -28,9 +28,10 @@ class Employee:
         title=Label(root,text='Employee',bg='#2D9290',fg='White',font=('times new romman',30,'bold','italic'),relief=GROOVE,bd=5)
         title.pack(fill=X)
 
-        frame = Frame(root,font=('times new romman',10,'bold','italic'),fg='gold',padx=10)
+        frame = Frame(root)
         # frame.pack(fill=X)
-        btn = Button(frame,text="Billing",command=self.billgeneration)
+        btn = Button(root,text="Billing",command=self.billgeneration)
+        btn.pack(anchor=CENTER)
         root.mainloop()
-    
-obj = Employee().gui()
+
+Employee("","","<","","").gui()
