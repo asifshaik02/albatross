@@ -46,9 +46,6 @@ class Billing:
         n = m_name.get()
         c = int(quantity.get())
         res = sq.execute(f"select m_cost from medicine where m_name='{n}'")
-
-        self.sum += res[0][0] * c
-
         columns=('m_name','m_cost','c')
         viewtree=ttk.Treeview(f3,columns=columns,show='headings')
         viewtree.heading('m_name',text="Medicine Name")
