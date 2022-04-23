@@ -159,7 +159,7 @@ class Owner:
         e_entry.grid(row=0,column=1,padx=10)
         submitFram1.grid(row=1,column=0,padx=20,pady=30)
         x=Button(childframe2,text=" Hide Information ",command=forchildhide)
-        x.grid(row=0,column=0)
+        x.grid(row=4,column=0)
 
         labele_name=Label(childframe2,text="Name of the employee is          :  ")
         labele_nameq=Label(childframe2)

@@ -3,11 +3,11 @@ class Database:
     def __init__(self) -> None:
         try:
             self.conn = psycopg2.connect(
-                host="127.0.0.1",
-                database="albatross",
+                host="localhost",
+                database="postgres",
                 user="postgres",
                 port="5432",
-                password="postgres"
+                password="1234"
             )
             self.cur = self.conn.cursor()
         except Exception as error:

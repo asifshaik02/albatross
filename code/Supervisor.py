@@ -15,7 +15,7 @@ import tkinter as tk
 import datetime as dt
 from PIL import ImageTk, Image
 from setuptools import Command
-from Medicine import forOwner
+
 from Database import Database
 
 # from tkinter.messagebox import shorootfo
@@ -54,7 +54,8 @@ class Supervisor:
         pass
 
     def assignwork(self,eid,worktype ):
-
+        curr.execute(f"UPDATE employee SET workingtype = '{worktype}' WHERE e_id = '{eid}';")
+        messagebox.showinfo("Update","Updated worktype sucessfully")
         pass
 
     def assignWorkHrs(self, e_id,no_of_hrs):
@@ -86,7 +87,7 @@ class Supervisor:
         e_working=StringVar()
         owner_id = StringVar()
         medicineid=StringVar()
-        medicinequantity=StringVar()
+        medicinequantity=IntVar()
         e_workhrs=IntVar()
         def opendchldfrm2():
             clos()
@@ -101,7 +102,7 @@ class Supervisor:
             for i in q:
                 print(i)
                 z=i
-            if 1:
+            if z==[]:
                 popup()
                 return
             self.assignwork(x,y)
@@ -117,17 +118,18 @@ class Supervisor:
             x=owner_id.get()
             y=medicineid.get()
             z=medicinequantity.get()
-            q = curr.execute(f"select * from employee where e_id='{x}'")
+            q = curr.execute(f"select * from owners where o_id='{x}'")
             q=curr.fetchall()
             z=[]
             for i in q:
                 print(i)
                 z=i
-            if 1:
+            if z==[]:
                 popup()
                 return
             self.requestMedicines(x,y,z)
             openchldfrm3()
+            messagebox.showinfo("update","Request sent to Owner")
         def Assignworkhrscheck():
             clos()
             x=e_id_store.get()
@@ -135,7 +137,7 @@ class Supervisor:
             print(x)
             q = curr.execute(f"select * from employee where e_id='{x}'")
             q=curr.fetchall()
-            
+            z=[]
             for i in q:
                 print(i)
                 z=i
@@ -144,6 +146,7 @@ class Supervisor:
                 return
             self.assignWorkHrs(x,y)
             openchldfrm4()
+            messagebox.showinfo("update","Working Hours updated Sucessfully")
             pass
         submitchildfram1 = Button(childframe1,text='Assign Work',command=opendchldfrm2)
         submitchildfram1.grid(row=0,column=0)
@@ -178,7 +181,7 @@ class Supervisor:
         mq_entry.grid(row=2,column=1)
         submitchildfram3.grid(row=3,column=1)
 
-        eid_label = Label(childframe4,text="Enter Owner ID",font=('times new romman',15,'bold','italic','underline'),fg='green')
+        eid_label = Label(childframe4,text="Enter Employee ID",font=('times new romman',15,'bold','italic','underline'),fg='green')
         eid_entry = Entry(childframe4,textvariable=e_id_store,relief=SUNKEN,bd=7)
         ew_id=Label(childframe4,text="Enter Working hours ",font=('times new romman',15,'bold','italic','underline'),fg='green')
         ew_entry = Entry(childframe4,textvariable=e_workhrs,relief=SUNKEN,bd=7)
@@ -189,10 +192,8 @@ class Supervisor:
         ew_entry.grid(row=1,column=1)
         submitchildfram4.grid(row=2,column=1)
         def popup():
-            # showinfo showwarning showerror askquestion askokcancel askyesno (different messagebox here not completed)
             messagebox.showwarning("Enter valid Employee ID")
         
-        # submitFram1 = Button(childframe1,text='Submit',command=frame1submit)
         root.mainloop()
         curr.close()
         conn.close()
