@@ -62,8 +62,8 @@ class Medicine:
         medIdLabel = Label(topFrame,text="Medicine Id:",pady=40,padx=40)
         medIdLabel.grid(row=0,column=0)
 
-        med_id = StringVar()
-        medIdEntry = Entry(topFrame, textvariable=med_id)
+        # med_id = StringVar()
+        medIdEntry = Entry(topFrame)
         medIdEntry.grid(row=0, column=1)
 
         bottomFrame = Frame(root,pady=20)
@@ -86,13 +86,8 @@ class Medicine:
             Label(bottomFrame,text="Reorder level:").grid(row=5,column=0,sticky=W,pady=2)
             Label(bottomFrame,text=self.reorder_lvl).grid(row=5,column=1,sticky=W)
 
-        getDetails = partial(show, med_id)
+        getDetails = partial(show, medIdEntry)
         getRackButton = Button(topFrame,text="Get Details", command=getDetails)
         getRackButton.grid(row=0,column=2,padx=20)
         
         root.mainloop()
-
-def forOwner():
-    return obj.gui()
-
-obj = Medicine()
